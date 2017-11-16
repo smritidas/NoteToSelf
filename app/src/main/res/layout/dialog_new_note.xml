@@ -3,8 +3,8 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:padding="10dp"
     >
-<!-- TODO(1) The checkboxes aren't lining up properly, fix this after adding ids -->
 
+<!-- This is approximate-->
     <EditText
         android:id="@+id/editText"
         android:layout_width="wrap_content"
