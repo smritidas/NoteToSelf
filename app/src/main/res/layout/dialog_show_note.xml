@@ -16,12 +16,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageViewToDo"
-        android:src="@drawable/ic_check_box_outline_blank_black_24dp"/>
+        android:src="@drawable/ic_check_box_outline_blank_black_24dp"
+        android:layout_toRightOf="@id/imageViewImportant"/>
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageViewIdea"
-        android:src="@drawable/ic_wb_incandescent_black_24dp"/>
+        android:src="@drawable/ic_wb_incandescent_black_24dp"
+        android:layout_toRightOf="@id/imageViewToDo"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -33,6 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtTitle"
+        android:layout_alignParentLeft="true"
         android:id="@+id/txtDescription" />
 
     <Button
@@ -42,6 +45,7 @@
         android:layout_toEndOf="@+id/txtDescription"
         android:id="@+id/btnOK"
         android:text="@string/ok_button"
+       android:layout_below="@id/btnOK"
          />
 
 </RelativeLayout>
