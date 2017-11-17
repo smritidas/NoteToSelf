@@ -3,6 +3,7 @@ package com.example.android.notetoself;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
@@ -64,5 +65,8 @@ public class DialogNewNote extends DialogFragment {
 
 
         return builder.create();
+    }
+
+    public void show(FragmentManager fragmentManager, String s) {
     }
 }
