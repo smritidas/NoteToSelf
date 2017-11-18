@@ -9,8 +9,8 @@
         android:layout_height="wrap_content"
         android:id="@id/imageViewImportant"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:src="@drawable/ic_warning_black_24dp"
         />
 
     <ImageView
@@ -18,8 +18,9 @@
         android:layout_height="wrap_content"
         android:id="@id/imageViewToDo"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_toEndOf="@id/imageViewImportant"
+        android:src="@drawable/ic_check_box_outline_blank_black_24dp"
+
         />
 
     <ImageView
@@ -27,7 +28,27 @@
         android:layout_height="wrap_content"
         android:id="@id/imageViewIdea"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
+        android:layout_toEndOf="@id/imageViewToDo"
+        android:src="@drawable/ic_wb_incandescent_black_24dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@id/txtTitle"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="22dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@id/txtDescription"
+        android:layout_below="@id/txtTitle"
         android:layout_alignParentStart="true"
         />
 
