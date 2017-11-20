@@ -4,44 +4,75 @@ package com.example.android.notetoself;
  * Note to self app
  */
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static android.R.attr.button;
+import static android.os.Build.VERSION_CODES.N;
 
 public class MainActivity extends AppCompatActivity {
 
     Note TempNote = new Note();
+    private NoteAdapter NoteAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+       NoteAdapter = new NoteAdapter();
 
 
+        //TODO Wire this up properly
+        ListView listNote = (ListView) findViewById(R.id.listview);
 
+        listNote.setAdapter(NoteAdapter);
 
-//        Button button = (Button) findViewById(R.id.button);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                DialogShowNote dialog = new DialogShowNote();
-//                dialog.sendNoteSelected(TempNote);
-//                dialog.show(getFragmentManager(), "123");
-//            }
-//        });
+        listNote.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View view, int whichItem, long id) {
+
+				/*
+					Create  a temporary Note
+					Which is a reference to the Note
+					that has just been clicked
+				*/
+                Note tempNote = NoteAdapter.getItem(whichItem);
+
+                // Create a new dialog window
+                DialogShowNote dialog = new DialogShowNote();
+
+                // Send in a reference to the note to be shown
+                dialog.sendNoteSelected(tempNote);
+
+                // Show the dialog window with the note in it
+                dialog.show(getFragmentManager(), "");
+
+            }
+        });
     }
 
+
+    public void createNewNote(Note n){
+
+        NoteAdapter.addNote(n);
+
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
@@ -83,9 +114,52 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public View getView(int whichItem, View view, ViewGroup viewGroup){
+
+            if(view == null){
+
+                LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+                view = inflater.inflate(R.layout.listitem, viewGroup, false);
+
+            }
+
+            TextView txtTitle = (TextView) view.findViewById(R.id.txtTitle);
+            TextView txtDescription = (TextView) view.findViewById(R.id.txtDescription);
+            ImageView imageImportant = (ImageView) view.findViewById(R.id.imageViewImportant);
+            ImageView imageToDo = (ImageView) view.findViewById(R.id.imageViewToDo);
+            ImageView imageIdea = (ImageView) view.findViewById(R.id.imageViewIdea);
+
+            Note tempNote = noteList.get(whichItem);
+
+            if(!tempNote.isImportant()){
+                imageImportant.setVisibility(View.GONE);
+            }
+
+            if(!tempNote.isImportant()){
+                imageToDo.setVisibility(View.GONE);
+            }
+
+            if(!tempNote.isImportant()){
+                imageIdea.setVisibility(view.GONE);
+            }
+
+            txtTitle.setText(tempNote.getTitle());
+            txtDescription.setText(tempNote.getDescription());
+
             return view;
+
+
         }
 
+        public void addNote(Note n){
+
+            noteList.add(n);
+            notifyDataSetChanged();
+
+        }
+
+
     }
+
 
 }
