@@ -1,8 +1,8 @@
 package com.example.android.notetoself;
 
-/**
- * Note to self app
- * //TODO(2) Settings activity and manifest
+
+import android.content.SharedPreferences;
+import android.support.v7.app.AppCompatActivity;*
  */
 
 import android.content.Context;
@@ -25,12 +25,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.R.attr.button;
+import static android.R.attr.preferenceStyle;
 import static android.os.Build.VERSION_CODES.N;
+
+//TODO(2) Manifest?
 
 public class MainActivity extends AppCompatActivity {
 
-    Note TempNote = new Note();
     private NoteAdapter NoteAdapter;
+    private boolean sound;
+    private int animOption;
+    private SharedPreferences preferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +81,14 @@ public class MainActivity extends AppCompatActivity {
 
         NoteAdapter.addNote(n);
 
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        preferences = getSharedPreferences("Note to self", MODE_PRIVATE);
+        sound = preferences.getBoolean("sound", true);
+        animOption = preferences.getInt("anim option", SettingsActivity.fast);
     }
 
     @Override
