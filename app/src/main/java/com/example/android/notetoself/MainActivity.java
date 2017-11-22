@@ -28,7 +28,7 @@ import static android.R.attr.button;
 import static android.R.attr.preferenceStyle;
 import static android.os.Build.VERSION_CODES.N;
 
-//TODO(2) Manifest?
+
 
 public class MainActivity extends AppCompatActivity {
 
