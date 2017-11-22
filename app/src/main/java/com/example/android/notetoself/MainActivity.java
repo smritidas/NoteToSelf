@@ -2,13 +2,13 @@ package com.example.android.notetoself;
 
 
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;*
- */
+import android.support.v7.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -121,8 +121,31 @@ public class MainActivity extends AppCompatActivity {
 
 
     public class NoteAdapter extends BaseAdapter{
+        private JSONSerializer serializer;
 
         List<Note> noteList = new ArrayList<Note>();
+
+        public NoteAdapter(){
+
+            serializer = new JSONSerializer("NoteToSelf.json", MainActivity.this.getApplicationContext());
+
+            try {
+                noteList = serializer.load();
+            } catch (Exception e) {
+                noteList = new ArrayList<Note>();
+                Log.e("Error loading notes: ", "", e);
+            }
+
+        }
+
+        public void saveNotes(){
+            try{
+               serializer.save(noteList);
+
+            }catch(Exception e){
+                Log.e("Error Saving Notes","", e);
+            }
+        }
 
         @Override
         public int getCount(){
@@ -185,6 +208,14 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+
+        NoteAdapter.saveNotes();
 
     }
 
