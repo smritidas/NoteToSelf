@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //TODO Wire this up properly
-        ListView listNote = (ListView) findViewById(R.id.listview);
+        ListView listNote = (ListView) findViewById(R.id.listView);
 
         listNote.setAdapter(NoteAdapter);
 
